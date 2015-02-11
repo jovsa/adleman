@@ -1,0 +1,20 @@
+---
+title: "Initial Data Exploration"
+author: "Jovan Sardinha"
+date: "Tuesday, February 10, 2015"
+output: html_document
+---
+
+
+Getting the data
+```{r}
+
+```
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
