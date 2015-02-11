@@ -8,7 +8,11 @@ output: html_document
 
 Getting the data
 ```{r}
+#file1Meta <- read.table(file = "./data/0A32eTdBKayjCWhZqDOQ.asm", sep=" ")
+file1Binary <- read.table(file = "./data/0A32eTdBKayjCWhZqDOQ.bytes", header = F)
 
+     
+     
 ```
 
 You can also embed plots, for example:
