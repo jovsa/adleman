@@ -1,24 +1,44 @@
 ---
 title: "Initial Data Exploration"
-author: "Jovan Sardinha"
 date: "Tuesday, February 10, 2015"
-output: html_document
+output:
+  html_document: 
+    theme: spacelab  
+    highlight: tango
 ---
 
+**Purpose**: To do an initial exploratory analysis to understand the data and provide insights into feature extraction.
+
+## Iteration 1: Analysis with n = 2
+
+Here is the given values for each of these files:  
+File 1:  
+* FileName: 0A32eTdBKayjCWhZqDOQ  
+* Classification Class:  
+
+File 2
+* FileName: 0ACDbR5M3ZhBJajygTuf
+* Classification Class:
 
 Getting the data
+```{r, cache =TRUE}
+# File 1
+file_1_Meta <- readLines("../data/dataSample/0A32eTdBKayjCWhZqDOQ.asm")
+file_1_Bin <- read.table(file = "../data/dataSample/0A32eTdBKayjCWhZqDOQ.bytes", header = F)
+
+# File 2
+file_2_Meta <- readLines("../data/dataSample/0ACDbR5M3ZhBJajygTuf.asm")
+file_2_Bin <- read.table(file = "../data/dataSample/0ACDbR5M3ZhBJajygTuf.bytes", header = F)
+```
+
+Let's look at the contents  
 ```{r}
-#file1Meta <- read.table(file = "./data/0A32eTdBKayjCWhZqDOQ.asm", sep=" ")
-file1Binary <- read.table(file = "./data/0A32eTdBKayjCWhZqDOQ.bytes", header = F)
+# Metadata file
+head(file_1_Meta)
+tail(file_1_Meta)
 
-     
-     
+# Binary file
+head(file_1_Bin)
+tail(file_1_Bin)
 ```
 
-You can also embed plots, for example:
-
-```{r, echo=FALSE}
-plot(cars)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
