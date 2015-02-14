@@ -9,16 +9,19 @@ output:
 
 **Purpose**: To do an initial exploratory analysis to understand the data and provide insights into feature extraction.
 
+```{r}
+library(stringr)
+
+
+
+```
+
 ## Iteration 1: Analysis with n = 2
 
-Here is the given values for each of these files:  
-File 1:  
-* FileName: 0A32eTdBKayjCWhZqDOQ  
-* Classification Class:  
-
-File 2
-* FileName: 0ACDbR5M3ZhBJajygTuf
-* Classification Class:
+Notes: 
+* FileName1: 0A32eTdBKayjCWhZqDOQ ; Classification Class: 2  
+* FileName2: 0ACDbR5M3ZhBJajygTuf; Classification Class: 7
+* Filenames are char(20) in length
 
 Getting the data
 ```{r, cache =TRUE}
@@ -35,10 +38,65 @@ Let's look at the contents
 ```{r}
 # Metadata file
 head(file_1_Meta)
-tail(file_1_Meta)
+tail(file_2_Meta)
 
 # Binary file
 head(file_1_Bin)
-tail(file_1_Bin)
+tail(file_2_Bin)
+```
+
+Performing FFT on the Binary files
+
+```{r, cache=TRUE}
+
+# read in training labels
+trainLabels <- read.table(file="../data/trainLabels.csv", sep=",", header=T)
+
+# read in training data
+trainFilenames <- list.files("../data/dataSample/", pattern="*.bytes", full.names=TRUE)
+
+noTrain <- length(trainFilenames) # Maybe when n is large, might want to subStrRight
+
+# variable to break the job into 1000 blocks
+progressBlock <- 10
+
+# variable to set the width of FFT analysis to keep
+FFTWidth <-10
+
+# create empty matrix to contain results
+myFFT <- matrix(,nrow=noTrain,ncol=2*FFTWidth)
+# label the matrix using the base part of the filenames
+row.names(myFFT)=substr(trainFilenames,20,40)
+
+for (i in 1:noTrain) {
+    print(trainFilenames[i])
+
+    # take FFT of the decimal values of the hex values in the .bytes file with 1st column (labels) removed
+    thisFFT=fft(as.numeric(sprintf("%d",unlist(read.table(trainFilenames[i])[,2:17], use.names=FALSE))))[1:FFTWidth]
+
+     # separate out the resulting complex numbers into amplitude and phase parts and store them separately
+    myFFT[i,1:FFTWidth]=Mod(thisFFT)
+    myFFT[i,(FFTWidth+1):(2*FFTWidth)]=Arg(thisFFT)
+
+    # check on progress and dump results so far if it's warranted
+    if ((i %% progressBlock) == 0) {
+      print(i)
+      # write out a copy of the results so we can restart if it crashes
+      write.table(myFFT,file="FFTResults.txt",sep='\t',row.names=TRUE)
+    }
+}
+# dump final results
+write.table(myFFT,file="FFTResults.txt",sep='\t',row.names=TRUE)
+
+```
+
+
+Graphing the results
+```{r}
+FFTResults <- read.table("FFTResults.txt")
+
+g <- ggplot(FFTResults) + geom_histogram()
+print(g)
+
 ```
 
