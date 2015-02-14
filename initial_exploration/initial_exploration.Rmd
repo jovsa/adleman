@@ -11,8 +11,8 @@ output:
 
 ```{r}
 library(stringr)
-
-
+library(reshape)
+library(ggplot2)
 
 ```
 
@@ -58,15 +58,15 @@ trainFilenames <- list.files("../data/dataSample/", pattern="*.bytes", full.name
 noTrain <- length(trainFilenames) # Maybe when n is large, might want to subStrRight
 
 # variable to break the job into 1000 blocks
-progressBlock <- 10
+progressBlock <- 100
 
 # variable to set the width of FFT analysis to keep
-FFTWidth <-10
+FFTWidth <-100
 
 # create empty matrix to contain results
 myFFT <- matrix(,nrow=noTrain,ncol=2*FFTWidth)
 # label the matrix using the base part of the filenames
-row.names(myFFT)=substr(trainFilenames,20,40)
+row.names(myFFT)=substr(trainFilenames,20,39)
 
 for (i in 1:noTrain) {
     print(trainFilenames[i])
@@ -94,9 +94,14 @@ write.table(myFFT,file="FFTResults.txt",sep='\t',row.names=TRUE)
 Graphing the results
 ```{r}
 FFTResults <- read.table("FFTResults.txt")
+FFTResults$name <- row.names(myFFT)
 
-g <- ggplot(FFTResults) + geom_histogram()
+meltFFTResults <- melt(FFTResults, id ="name")
+
+
+g <- ggplot(meltFFTResults, aes(x=variable, y=value, color = name)) + geom_point() + geom_density()
 print(g)
 
 ```
+
 
