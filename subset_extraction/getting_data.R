@@ -4,7 +4,7 @@ trainLabels <- read.csv(trainLabelsDir, header = TRUE)
 
 # Givens
 numClasses <- 9
-n <- 43
+tot_n <- 43
 
 # Traning Proportions
 sampleSize <- NULL
@@ -39,19 +39,30 @@ sampleSize <- data.frame(classID, classSize)
 # Case 1
 sampleSize <- cbind(sampleSize, case1 <- mapply(function(x,y){round(x*y,0)}, 
                                                 x = classProp$prop,
-                                                y = n)) 
+                                                y = tot_n)) 
 names(sampleSize)[3] <- "case1"
 
 # Case 2
 sampleSize <- cbind(sampleSize, case2 <- mapply(function(x,y){round(y/x,0)}, 
                                                 x = numClasses,
-                                                y = n)) 
+                                                y = tot_n)) 
 names(sampleSize)[4] <- "case2"
 
-# Case 3
+# Calculating Class size
 sampleSize$classSize <- mapply(function(x,y){round(mean(c(x,y)),0)}, 
                                                 x = sampleSize$case1,
                                                 y = sampleSize$case2) 
+# Sampling
+set.seed(1123)
+
+subsetList <- NULL
+for(i in 1:numClasses){
+     tempLabels <- trainLabels[trainLabels$Class == i,]
+     n <- sampleSize[sampleSize$classID == i,"classSize"]
+     subsetList <- rbind(subsetList,tempLabels[sample(1:nrow(tempLabels), n, replace = FALSE),])
+     tempLabels <- NULL
+     
+}
 
 
  
