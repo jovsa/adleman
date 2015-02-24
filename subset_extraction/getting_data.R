@@ -4,7 +4,15 @@ trainLabels <- read.csv(trainLabelsDir, header = TRUE)
 
 # Givens
 numClasses <- 9
+tot_trainProp <- 0.8
+trainProp <- 0.6
+CVProp <- 0.2
 tot_n <- 43
+
+# Calculating the n for Train and CV sets
+train_n <- round((tot_n/tot_trainProp)*trainProp,0)
+CV_n <- round((tot_n/tot_trainProp)*CVProp,0)
+
 
 # Traning Proportions
 sampleSize <- NULL
@@ -63,6 +71,9 @@ for(i in 1:numClasses){
      tempLabels <- NULL
      
 }
+
+
+
 
 
  
