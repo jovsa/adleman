@@ -1,4 +1,4 @@
 *.Rhistory
 data/dataSample/
-data/test/
-data/train/
+data/test/**
+data/train/**
