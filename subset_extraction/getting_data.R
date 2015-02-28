@@ -10,8 +10,8 @@ CVProp <- 0.2
 tot_n <- 43
 
 # Calculating the n for Train and CV sets
-train_n <- round((tot_n/tot_trainProp)*trainProp,0)
-CV_n <- round((tot_n/tot_trainProp)*CVProp,0)
+# train_n <- round((tot_n/tot_trainProp)*trainProp,0)
+# CV_n <- round((tot_n/tot_trainProp)*CVProp,0)
 
 
 # Traning Proportions
@@ -59,7 +59,8 @@ names(sampleSize)[4] <- "case2"
 # Calculating Class size
 sampleSize$classSize <- mapply(function(x,y){round(mean(c(x,y)),0)}, 
                                                 x = sampleSize$case1,
-                                                y = sampleSize$case2) 
+                                                y = sampleSize$case2)
+#sampleSize$ClassSizeTrain <- 
 # Sampling
 set.seed(1123)
 
