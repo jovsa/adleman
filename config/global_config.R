@@ -1,7 +1,7 @@
 # Working directory initialization
 
-wd <- "./Documents/GitHub/Project_Adleman" # On Jovan's local
-#wd <- "./GitHub/Project_Adleman" # on EC2
+#wd <- "./Documents/GitHub/Project_Adleman" # On Jovan's local
+wd <- "./GitHub/Project_Adleman" # on EC2
 setwd(wd)
 
 # Package Installation
@@ -18,7 +18,8 @@ setwd(wd)
 # install.packages("ggplot2")
 # install.packages("reshape")
 # install.packages("wordcloud")
-install.packages("Hmisc")
+#install.packages("Hmisc")
+#install.packages("RCurl")
 
 
 # Library initialization
@@ -36,7 +37,7 @@ library(ggplot2)
 library(reshape)
 library(wordcloud)
 library(Hmisc)
-
+library(RCurl)
 
 # Cleaners
 wd <- NULL
