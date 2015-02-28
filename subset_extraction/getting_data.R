@@ -70,7 +70,6 @@ for(i in 1:numClasses){
      n <- sampleSize[sampleSize$classID == i,"classSize"]
      subsetList <- rbind(subsetList,tempLabels[sample(1:nrow(tempLabels), n, replace = FALSE),])
      tempLabels <- NULL
-     
 }
 
 
