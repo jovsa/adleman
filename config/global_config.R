@@ -20,6 +20,7 @@ setwd(wd)
 # install.packages("wordcloud")
 #install.packages("Hmisc")
 #install.packages("RCurl")
+#install.packages("rmongodb")
 
 
 # Library initialization
@@ -32,12 +33,12 @@ library(tau)
 library(ngram)
 library(knitr)
 library(Matrix)
-library(RWeka)
 library(ggplot2)
 library(reshape)
 library(wordcloud)
 library(Hmisc)
 library(RCurl)
+library(rmongodb)
 
 # Cleaners
 wd <- NULL

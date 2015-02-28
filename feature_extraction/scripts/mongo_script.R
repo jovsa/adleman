@@ -10,12 +10,12 @@ if(mongo.is.connected(mongo) == TRUE)
   all_results <- mongo.find.all(mongo, collection)
   
   #query for people over the age of 50
-  query <- list('age' = list ('$gte' = 50))
-  over_results <- mongo.find.all(mongo, collection, query)
+  #query <- list('age' = list ('$gte' = 50))
+  #over_results <- mongo.find.all(mongo, collection, query)
   
   #Inserting some data
-  a <- mongo.bson.from.JSON('{"name":"John","last name":"Judi","age":75}')
+  a <- mongo.bson.from.JSON('{"name":"Jovan","last name":"Sardinha","age":12}')
   mongo.insert(mongo,collection,a)
+  
+  
 }
-
-
