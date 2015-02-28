@@ -1,0 +1,4 @@
+*.Rhistory
+data/dataSample/
+data/test/
+data/train/
