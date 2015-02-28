@@ -1,7 +1,7 @@
-# Working directory initialization - on EC2
+# Working directory initialization
 
-#wd <- "./Documents/GitHub/Project_Adleman"
-wd <- "./GitHub/Project_Adleman"
+wd <- "./Documents/GitHub/Project_Adleman" # On Jovan's local
+#wd <- "./GitHub/Project_Adleman" # on EC2
 setwd(wd)
 
 # Package Installation
@@ -18,6 +18,7 @@ setwd(wd)
 # install.packages("ggplot2")
 # install.packages("reshape")
 # install.packages("wordcloud")
+install.packages("Hmisc")
 
 
 # Library initialization
@@ -34,6 +35,7 @@ library(RWeka)
 library(ggplot2)
 library(reshape)
 library(wordcloud)
+library(Hmisc)
 
 
 # Cleaners
