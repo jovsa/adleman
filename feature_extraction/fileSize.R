@@ -1,8 +1,19 @@
 
 trainDir <- "./data/train/"
 
-fileName <- list.files(trainDir)
+fileName <- list.files()
 
-file.info(paste0(trainDir,"3Jf94PIUvg8pCqLXKzEa.bytes"))$size
+fileSizes <- NULL
 
-for (i in 1: nrow(fileName))
+
+for (v in fileName)
+  {
+    fileName <- v
+    fileSize <- file.info(v)$size
+    
+    fileSizes <- rbind(fileSizes, data.frame(fileName, fileSize))
+                                                          
+  #fileSizes <- c(fileSizes,file.info(v)$size)
+  }
+
+
