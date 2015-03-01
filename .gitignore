@@ -2,3 +2,4 @@
 data/dataSample/
 data/test/**
 data/train/**
+*.txt
