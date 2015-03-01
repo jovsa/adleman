@@ -1,5 +1,4 @@
 
-
 # read in training data
 trainFilenames <- list.files("./data/train/", pattern="*.bytes", full.names=TRUE)
 noTrain <- length(trainFilenames)
@@ -15,7 +14,7 @@ myFFT <- matrix(,nrow=noTrain,ncol=2*FFTWidth)
 
 
 # label the matrix using the base part of the filenames
-row.names(myFFT)=substr(trainFilenames,14,39)
+row.names(myFFT)=substr(trainFilenames,14,33)
 
 
 for (i in 1:noTrain) {
@@ -31,16 +30,43 @@ for (i in 1:noTrain) {
   # check on progress and dump results so far if it's warranted
   if ((i %% progressBlock) == 0) {
     print(i)
-    # write out a copy of the results so we can restart if it crashes
-    write.table(myFFT,file="FFTResults.txt",sep='\t',row.names=TRUE)
+
   }
 }
 
-FFTResults <- read.table("FFTResults.txt")
-FFTResults$name <- row.names(myFFT)
+FFT <- NULL
+# FFT$fileName <- toString(rownames(myFFT))
+FFT <- data.frame(myFFT)
+FFT$fileName <- (rownames(myFFT))
 
-meltFFTResults <- melt(FFTResults, id ="name")
+# Reorganizing the FFT
+col_idx <- grep("fileName", names(FFT))
+FFT <- FFT[, c(col_idx, (1:ncol(FFT))[-col_idx])]
 
 
-g <- ggplot(meltFFTResults, aes(x=variable, y=value, color = name)) + geom_point() + geom_density()
-print(g)
+
+
+
+
+
+
+
+
+
+
+## CODE GRAVEYARD
+# write out a copy of the results so we can restart if it crashes
+#write.table(myFFT,file="FFTResults.txt",sep='\t',row.names=TRUE)
+
+
+# FFTResults <- read.table("FFTResults.txt")
+# FFTResults$name <- row.names(myFFT)
+# 
+# meltFFTResults <- melt(FFTResults, id ="name")
+# 
+# 
+# g <- ggplot(meltFFTResults, aes(x=variable, y=value, color = name)) + geom_point() + geom_density()
+# print(g)
+
+
+

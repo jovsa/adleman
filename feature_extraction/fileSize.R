@@ -1,19 +1,22 @@
 
-trainDir <- "./data/train/"
 
-fileName <- list.files()
-
-fileSizes <- NULL
+fileNameBytes <- list.files("./data/train/", pattern="*.bytes",full.names=TRUE)
+fileNameAsm <- list.files("./data/train/", pattern="*.asm",full.names=TRUE)
 
 
-for (v in fileName)
+
+if(length(fileNameBytes) == length(fileNameAsm)){
+  numFiles <- length(fileNameBytes)
+  fileSizes <- NULL
+}
+
+for (v  in 1:numFiles)
   {
-    fileName <- v
-    fileSize <- file.info(v)$size
-    
-    fileSizes <- rbind(fileSizes, data.frame(fileName, fileSize))
-                                                          
-  #fileSizes <- c(fileSizes,file.info(v)$size)
+    fileName <- substr(fileNameBytes[v], 14,33)
+    fileSizeBytes <- file.info(fileNameBytes[v])$size
+    fileSizeAsm <- file.info(fileNameAsm[v])$size
+
+    fileSizes <- rbind(fileSizes, data.frame(fileName, fileSizeBytes, fileSizeAsm ))                                                      
   }
 
 
