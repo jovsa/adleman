@@ -21,6 +21,7 @@ setwd(wd)
 #install.packages("Hmisc")
 #install.packages("RCurl")
 #install.packages("rmongodb")
+# install.packages("e1071")
 
 
 # Library initialization
@@ -39,6 +40,8 @@ library(wordcloud)
 library(Hmisc)
 library(RCurl)
 library(rmongodb)
+library(caret)
+library(e1071)
 
 # Cleaners
 wd <- NULL
