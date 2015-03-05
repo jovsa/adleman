@@ -23,7 +23,7 @@ if(subsetExtraction  == 1){
 
 
 if(featureExtraction  == 1){
-  dataType <- "test"
+  dataType <- "train"
   source("./feature_extraction/FFT.R")
   FFT <- FFTFunction(dataType , 100, 100 )
   write.table(FFT, file="./data/cache/FFTTrain.txt")
@@ -32,6 +32,4 @@ if(featureExtraction  == 1){
   fileSize <- fileSizeFunction(dataType)
   write.table(fileSize, file="./data/cache/fileSizeTrain.txt")
   temp <- NULL
-  
-  
 }
