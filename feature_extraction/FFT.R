@@ -1,6 +1,8 @@
 
 FFTFunction <- function(fileTyes, progressBlock, FFTWidth){
   dataDir <- paste0("./data/", fileTyes, "/")
+  
+  
   # read in data
   fileNames <- list.files(dataDir, pattern="*.bytes", full.names=TRUE)
   noTrain <- length(fileNames)
