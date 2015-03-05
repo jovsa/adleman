@@ -1,8 +1,9 @@
 
-
-fileNameBytes <- list.files("./data/train/", pattern="*.bytes",full.names=TRUE)
-fileNameAsm <- list.files("./data/train/", pattern="*.asm",full.names=TRUE)
-
+fileSizeFunction <- function(fileTyes){
+  dataDir <- paste0("./data/", fileTyes, "/")
+  
+fileNameBytes <- list.files(dataDir, pattern="*.bytes",full.names=TRUE)
+fileNameAsm <- list.files(dataDir, pattern="*.asm",full.names=TRUE)
 
 
 if(length(fileNameBytes) == length(fileNameAsm)){
@@ -18,5 +19,7 @@ for (v  in 1:numFiles)
 
     fileSizes <- rbind(fileSizes, data.frame(fileName, fileSizeBytes, fileSizeAsm ))                                                      
   }
+  
+  return(fileSizes)
 
-
+}
