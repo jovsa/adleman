@@ -1,12 +1,15 @@
-rm(list = ls())
 
-totalFeaturesList <- read.table(file =  "totalFeaturesList.txt")
-totalFeaturesList$Class <- as.factor(totalFeaturesList$Class)
 
-set.seed(112)
-inTraining <- createDataPartition(totalFeaturesList$Class, p = .70, list = FALSE)
-training <- totalFeaturesList[ inTraining,]
-CV  <- totalFeaturesList[-inTraining,]
+modelFit_rf <- function(seedNum){
+
+#featureList <- read.table(file =  "featureList.txt")
+#featureList$Class <- as.factor(featureList$Class)
+
+set.seed(seedNum)
+featureList$Class <- as.factor(featureList$Class)
+inTraining <- createDataPartition(featureList$Class, p = .70, list = FALSE)
+training <- featureList[ inTraining,]
+CV  <- featureList[-inTraining,]
 
 # Invoking parallel processing
 cl <- makeCluster(detectCores())
@@ -14,8 +17,7 @@ registerDoParallel(cl)
 
 
 # Random Forest
-set.seed(112)
-
+set.seed(seedNum)
 
 fitControl <- trainControl(## 3-fold CV
   method = "repeatedcv",
@@ -29,6 +31,10 @@ modelFit_rf <- train(Class ~.,
                      prox=TRUE,                     
                      data = training)
 
-CV$Predicted <- predict(modelFit_rf, newdata = CV)
+return(modelFit_rf)
 
-confusionMatrix(CV$Class, CV$Predicted)
+# CV$Predicted <- predict(modelFit_rf, newdata = CV)
+# 
+# confusionMatrix(CV$Class, CV$Predicted)
+
+}

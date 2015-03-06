@@ -13,10 +13,12 @@
 # install.packages("ggplot2")
 # install.packages("reshape")
 # install.packages("wordcloud")
-#install.packages("Hmisc")
-#install.packages("RCurl")
-#install.packages("rmongodb")
+# install.packages("Hmisc")
+# install.packages("RCurl")
+# install.packages("rmongodb")
 # install.packages("e1071")
+# install.packages("parallel")
+# install.packages("doParallel")
 
 
 # Library initialization
@@ -37,5 +39,6 @@ library(RCurl)
 library(rmongodb)
 library(caret)
 library(e1071)
-
+library(parallel)
+library(doParallel)
 

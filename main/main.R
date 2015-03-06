@@ -10,10 +10,13 @@ wd <- NULL
 
 source("./config/global_config.R")
 
-# Variables; 0 = Do not do; 1 = DO
+# Global Variables; 0 = Do not do; 1 = DO
+seedNum <- 112
 subsetExtraction <- 0
 featureExtraction <- 1
 featureList <- 1
+modelTrain <- 1
+CVResults <- 1
 
 
 if(subsetExtraction  == 1){
@@ -22,20 +25,21 @@ if(subsetExtraction  == 1){
   
 }
 
-
+# Feature extraction
 if(featureExtraction  == 1){
-  dataType <- "test"
+  dataType <- "train"
   source("./feature_extraction/FFT.R")
   FFT <- FFTFunction(dataType , 100, 100)
   #write.table(FFT, file="./data/cache/FFTTrain.txt")
     
   source("./feature_extraction/fileSize.R")
   fileSizes <- fileSizeFunction(dataType)
-  #write.table(fileSize, file="./data/cache/fileSizeTrain.txt")
+  #write.table(fileSizes, file="./data/cache/fileSizeTrain.txt")
   
 }
 
 
+# Feature list compilation
 if(featureList  == 1){
   dataType <- "train"
   source("./features/feature_list.R")
@@ -43,4 +47,17 @@ if(featureList  == 1){
 }
 
 
+# Model traning 
+if(modelTrain  == 1){
+  source("./model_building/model_building.R")
+  modelFit_rf <- modelFit_rf(seedNum)
+   
+}
+
+# Cross Validating
+if(CVResults  == 1){
+  source("./accuracy_CV/CV_results.R")
+  CVResults <- cvResultsFunction(seedNum)
+  
+}
 

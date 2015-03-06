@@ -8,6 +8,8 @@ names(trainLabels)[1] <- paste("fileName")
 totalFeaturesList_Train <- NULL
 totalFeaturesList_Train <- merge(FFT, fileSizes, by = "fileName")
 totalFeaturesList_Train <- merge(totalFeaturesList_Train, trainLabels, by = "fileName")
+return(totalFeaturesList_Train)
+
 
 # Writing out the file
 # write.table(totalFeaturesList_Train ,file="totalFeaturesList_Train.txt",sep='\t',row.names=TRUE)
