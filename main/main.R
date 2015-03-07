@@ -72,7 +72,18 @@ if(CVResults  == 1){
 }
 
 # Getting the testing data
+
+## NEED TO FIGURE THIS OUT
 if(totalTestData == 1){
+  FFTTrain <- read.table("./data/cache/FFTTrain.txt")
+  fileSizeTrain <- read.table("./data/cache/fileSizeTrain.txt")
+  totalFeaturesList_Test <- merge(FFTTrain, fileSizeTrain, by = "fileName")
+  totalFeaturesList_Test[,2] <- as.numeric(totalFeaturesList_Test[,2])
+  
+  prob = predict(modelFit_rf,totalFeaturesList_Test[,-1], "prob")
+  
+  
+  
   
 }
 
