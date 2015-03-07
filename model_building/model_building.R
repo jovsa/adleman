@@ -2,15 +2,6 @@
 
 modelFit_rf <- function(seedNum){
 
-#featureList <- read.table(file =  "featureList.txt")
-#featureList$Class <- as.factor(featureList$Class)
-
-set.seed(seedNum)
-featureList$Class <- as.factor(featureList$Class)
-inTraining <- createDataPartition(featureList$Class, p = .70, list = FALSE)
-training <- featureList[ inTraining,]
-CV  <- featureList[-inTraining,]
-
 # Invoking parallel processing
 cl <- makeCluster(detectCores())
 registerDoParallel(cl)

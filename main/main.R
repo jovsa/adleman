@@ -15,8 +15,10 @@ seedNum <- 112
 subsetExtraction <- 0
 featureExtraction <- 1
 featureList <- 1
+dataSplit <- 1
 modelTrain <- 1
 CVResults <- 1
+totalTestData <- 1
 
 
 if(subsetExtraction  == 1){
@@ -47,17 +49,30 @@ if(featureList  == 1){
 }
 
 
+# Data splitting
+if(dataSplit  == 1){
+  source("./data_split/splitter.R")
+  totalData <- dataSplitFunction(seedNum)
+  training <- data.frame(totalData[1])
+  CV <- data.frame(totalData[2])
+}
+
+
 # Model traning 
 if(modelTrain  == 1){
   source("./model_building/model_building.R")
   modelFit_rf <- modelFit_rf(seedNum)
-   
 }
 
 # Cross Validating
 if(CVResults  == 1){
   source("./accuracy_CV/CV_results.R")
-  CVResults <- cvResultsFunction(seedNum)
+  CVResults <- cvResultsFunction()
+  
+}
+
+# Getting the testing data
+if(totalTestData == 1){
   
 }
 
