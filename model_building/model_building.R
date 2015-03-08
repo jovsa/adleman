@@ -10,17 +10,20 @@ registerDoParallel(cl)
 # Random Forest
 set.seed(seedNum)
 
-fitControl <- trainControl(## 3-fold CV
-  method = "repeatedcv",
-  number = 3,
-  ## repeated ten times
-  repeats = 3)
+# fitControl <- trainControl(## 3-fold CV
+#   method = "repeatedcv",
+#   number = 3,
+#   ## repeated ten times
+#   repeats = 3)
+# 
+# modelFit_rf <- train(Class ~.,
+#                      method = "rf",
+#                      trControl = fitControl,
+#                      prox=TRUE,                     
+#                      data = training)
 
-modelFit_rf <- train(Class ~.,
-                     method = "rf",
-                     trControl = fitControl,
-                     prox=TRUE,                     
-                     data = training)
+modelFit_rf <- randomForest(Class ~., data = training, prox=TRUE)
+
 
 return(modelFit_rf)
 

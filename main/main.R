@@ -12,7 +12,7 @@ source("./config/global_config.R")
 
 # Global Variables; 0 = Do not do; 1 = DO
 seedNum <- 112
-subsetExtraction <- 0
+subsetExtraction <- 1
 featureExtraction <- 1
 featureList <- 1
 dataSplit <- 1
@@ -26,6 +26,10 @@ if(subsetExtraction  == 1){
   source("./subset_extraction/data_population.R")
   
 }
+
+
+
+
 
 # Feature extraction
 if(featureExtraction  == 1){
@@ -79,11 +83,44 @@ if(totalTestData == 1){
   fileSizeTrain <- read.table("./data/cache/fileSizeTrain.txt")
   totalFeaturesList_Test <- merge(FFTTrain, fileSizeTrain, by = "fileName")
   totalFeaturesList_Test[,2] <- as.numeric(totalFeaturesList_Test[,2])
+  totalFeaturesList_Test[,102] <- as.numeric(totalFeaturesList_Test[,102])
+  totalFeaturesList_Test[,202] <- as.numeric(totalFeaturesList_Test[,202])
+  totalFeaturesList_Test[,203] <- as.numeric(totalFeaturesList_Test[,203])
   
-  prob = predict(modelFit_rf,totalFeaturesList_Test[,-1], "prob")
-  
-  
+#   totalFeaturesList_Test$Class <- predict(modelFit_rf,totalFeaturesList_Test[,-1])
+
+  prob <- data.frame(predict(modelFit_rf,totalFeaturesList_Test[,-1], type="prob"))
+  sampleSubmission <- read.csv("./data/sampleSubmission.csv")
+  prob <- cbind(sampleSubmission[,1], prob)
+
+  names(prob)[1] <- "Id"
+  names(prob)[2] <- "Prediction1"
+  names(prob)[3] <- "Prediction2"
+  names(prob)[4] <- "Prediction3"
+  names(prob)[5] <- "Prediction4"
+  names(prob)[6] <- "Prediction5"
+  names(prob)[7] <- "Prediction6"
+  names(prob)[8] <- "Prediction7"
+  names(prob)[9] <- "Prediction8"
+  names(prob)[10] <- "Prediction9"
+
+
+
+write.csv(file="prob.csv", x=prob, row.names = FALSE)
+# plot(modelFit_rf, log="y")
+
+
   
   
 }
 
+#capture.output(str(totalFeaturesList_Test[,-1], list.len = 999), file = "totalFeaturesList_Test.txt")
+#capture.output(str(training, list.len = 999), file = "training.txt")
+
+
+FFTtrain <-read.table("./data/cache/FFTTrain.txt")
+fileSizeTrain <- read.table("./data/cache/fileSizeTrain.txt")
+sampleSubmission <- read.csv("./data/sampleSubmission.csv")
+sampleSubmission$fileName <- sampleSubmission$Id
+sampleSubmission$fileName <- paste0(sampleSubmission$fileName,".")
+sampleSubmission$fileName <- substr(sampleSubmission$fileName,2,nchar(sampleSubmission$fileName))
