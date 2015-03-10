@@ -19,6 +19,7 @@
 # install.packages("e1071")
 # install.packages("parallel")
 # install.packages("doParallel")
+# install.packages("randomForest")
 
 
 # Library initialization
@@ -41,4 +42,5 @@ library(caret)
 library(e1071)
 library(parallel)
 library(doParallel)
+library(randomForest)
 

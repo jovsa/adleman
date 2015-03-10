@@ -118,9 +118,22 @@ write.csv(file="prob.csv", x=prob, row.names = FALSE)
 #capture.output(str(training, list.len = 999), file = "training.txt")
 
 
-FFTtrain <-read.table("./data/cache/FFTTrain.txt")
-fileSizeTrain <- read.table("./data/cache/fileSizeTrain.txt")
-sampleSubmission <- read.csv("./data/sampleSubmission.csv")
-sampleSubmission$fileName <- sampleSubmission$Id
-sampleSubmission$fileName <- paste0(sampleSubmission$fileName,".")
-sampleSubmission$fileName <- substr(sampleSubmission$fileName,2,nchar(sampleSubmission$fileName))
+# FFTtrain <-read.table("./data/cache/FFTTrain.txt")
+# fileSizeTrain <- read.table("./data/cache/fileSizeTrain.txt")
+# sampleSubmission <- read.csv("./data/sampleSubmission.csv")
+# sampleSubmission$fileName <- sampleSubmission$Id
+# sampleSubmission$fileName <- paste0(sampleSubmission$fileName,".")
+# sampleSubmission$fileName <- substr(sampleSubmission$fileName,2,nchar(sampleSubmission$fileName))
+# trainFileNames <- data.frame(sampleSubmission$Id, sampleSubmission$fileName)
+# names(trainFileNames)[1] <- "Id"
+# names(trainFileNames)[2] <- "fileName"
+# FFTtrain2 <- merge(FFTtrain, trainFileNames, by = "fileName")
+# FFTtrain2$fileName <- FFTtrain2$Id
+# FFTtrain2$Id <- NULL
+# write.table(FFTtrain2, "./data/cache/FFTTrain.txt")
+# 
+# 
+# fileSizeTrain2 <- merge(fileSizeTrain, trainFileNames, by = "fileName")
+# fileSizeTrain2$fileName <- fileSizeTrain2$Id
+# fileSizeTrain2$Id <- NULL
+# write.table(fileSizeTrain2, "./data/cache/fileSizeTrain.txt")
