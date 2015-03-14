@@ -36,11 +36,11 @@ if(featureExtraction  == 1){
   dataType <- "train"
   source("./feature_extraction/FFT.R")
   FFT <- FFTFunction(dataType , 100, 100)
-  #write.table(FFT, file="./data/cache/FFTTrain.txt")
+  #write.table(FFT, file="./data/cache/FFTTrain_n_1898.txt")
     
   source("./feature_extraction/fileSize.R")
   fileSizes <- fileSizeFunction(dataType)
-  #write.table(fileSizes, file="./data/cache/fileSizeTrain.txt")
+  #write.table(fileSizes, file="./data/cache/fileSizeTrain_n_1898.txt")
   
 }
 
@@ -79,9 +79,9 @@ if(CVResults  == 1){
 
 ## NEED TO FIGURE THIS OUT
 if(totalTestData == 1){
-  FFTTrain <- read.table("./data/cache/FFTTrain.txt")
-  fileSizeTrain <- read.table("./data/cache/fileSizeTrain.txt")
-  totalFeaturesList_Test <- merge(FFTTrain, fileSizeTrain, by = "fileName")
+  FFTTest <- read.table("./data/cache/FFTTest.txt")
+  fileSizeTest <- read.table("./data/cache/fileSizeTest.txt")
+  totalFeaturesList_Test <- merge(FFTTest, fileSizeTest, by = "fileName")
   totalFeaturesList_Test[,2] <- as.numeric(totalFeaturesList_Test[,2])
   totalFeaturesList_Test[,102] <- as.numeric(totalFeaturesList_Test[,102])
   totalFeaturesList_Test[,202] <- as.numeric(totalFeaturesList_Test[,202])

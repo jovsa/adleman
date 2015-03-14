@@ -7,7 +7,7 @@ numClasses <- 9
 tot_trainProp <- 0.8
 trainProp <- 0.6
 CVProp <- 0.2
-tot_n <-43
+tot_n <-1967
 
 # Calculating the n for Train and CV sets
 # train_n <- round((tot_n/tot_trainProp)*trainProp,0)
@@ -66,9 +66,17 @@ set.seed(1123)
 
 subsetList <- NULL
 for(i in 1:numClasses){
+  
      tempLabels <- trainLabels[trainLabels$Class == i,]
      n <- sampleSize[sampleSize$classID == i,"classSize"]
-     subsetList <- rbind(subsetList,tempLabels[sample(1:nrow(tempLabels), n, replace = FALSE),])
+     if(n <= nrow(tempLabels)){
+       subsetList <- rbind(subsetList,tempLabels[sample(1:nrow(tempLabels), n, replace = FALSE),])
+     } else{
+
+       n<- nrow(tempLabels)
+       subsetList <- rbind(subsetList,tempLabels[sample(1:nrow(tempLabels), n, replace = FALSE),])
+     }
+     
      tempLabels <- NULL
 }
 
