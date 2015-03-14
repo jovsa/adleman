@@ -12,7 +12,7 @@ source("./config/global_config.R")
 
 # Global Variables; 0 = Do not do; 1 = DO
 seedNum <- 112
-subsetExtraction <- 1
+subsetExtraction <- 0
 featureExtraction <- 1
 featureList <- 1
 dataSplit <- 1
@@ -86,12 +86,19 @@ if(totalTestData == 1){
   totalFeaturesList_Test[,102] <- as.numeric(totalFeaturesList_Test[,102])
   totalFeaturesList_Test[,202] <- as.numeric(totalFeaturesList_Test[,202])
   totalFeaturesList_Test[,203] <- as.numeric(totalFeaturesList_Test[,203])
+  row.names(totalFeaturesList_Test)<- totalFeaturesList_Test$fileName
   
 #   totalFeaturesList_Test$Class <- predict(modelFit_rf,totalFeaturesList_Test[,-1])
 
   prob <- data.frame(predict(modelFit_rf,totalFeaturesList_Test[,-1], type="prob"))
+  prob$fileName <- row.names(prob)
   sampleSubmission <- read.csv("./data/sampleSubmission.csv")
-  prob <- cbind(sampleSubmission[,1], prob)
+  names(sampleSubmission)[1] <- "fileName"
+  sampleSubmission <- data.frame(sampleSubmission[,c(1:2)])
+  
+  prob <- merge(prob,sampleSubmission, by.x = "fileName")
+  prob <- prob[,c(1:10)]
+
 
   names(prob)[1] <- "Id"
   names(prob)[2] <- "Prediction1"
