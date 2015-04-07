@@ -20,7 +20,7 @@ dataSplit <- 1
 modelTrain <- 1
 CVResults <- 1
 totalTestData <- 1
-#postAnalysis <- 1
+postAnalysis <- 0
 
 
 if(subsetExtraction  == 1){
@@ -118,10 +118,17 @@ write.csv(file="prob.csv", x=prob, row.names = FALSE)
 }
 
 
-# # Post Analysis
-# if(postAnalysis  == 1){
-#   plot(varImp(modelFit_rf, scale = TRUE))
-#   
-# }
+# Post Analysis
+ if(postAnalysis  == 1){
+  
+  # Plotting variable importance
+  png(filename = "./img/varImpPlot.png") 
+  varImpPlot(modelFit_rf, scale = TRUE)
+  dev.off()
+  
+  # CV results
+ CVResults
+   
+}
 
 
