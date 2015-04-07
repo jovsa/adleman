@@ -13,12 +13,14 @@ source("./config/global_config.R")
 # Global Variables; 0 = Do not do; 1 = DO
 seedNum <- 112
 subsetExtraction <- 0
-featureExtraction <- 1
+featureExtraction <- 0
+readFromCache <- 1
 featureList <- 1
 dataSplit <- 1
 modelTrain <- 1
 CVResults <- 1
 totalTestData <- 1
+#postAnalysis <- 1
 
 
 if(subsetExtraction  == 1){
@@ -26,9 +28,6 @@ if(subsetExtraction  == 1){
   source("./subset_extraction/data_population.R")
   
 }
-
-
-
 
 
 # Feature extraction
@@ -42,6 +41,12 @@ if(featureExtraction  == 1){
   fileSizes <- fileSizeFunction(dataType)
   #write.table(fileSizes, file="./data/cache/fileSizeTrain_n_1898.txt")
   
+}
+
+
+if(readFromCache ==1){
+  FFT <- read.table("./data/cache/FFTTrain_n_1898.txt")
+  fileSizes <- read.table("./data/cache/fileSizeTrain_n_1898.txt")
 }
 
 
@@ -76,8 +81,6 @@ if(CVResults  == 1){
 }
 
 # Getting the testing data
-
-## NEED TO FIGURE THIS OUT
 if(totalTestData == 1){
   FFTTest <- read.table("./data/cache/FFTTest.txt")
   fileSizeTest <- read.table("./data/cache/fileSizeTest.txt")
@@ -111,36 +114,14 @@ if(totalTestData == 1){
   names(prob)[9] <- "Prediction8"
   names(prob)[10] <- "Prediction9"
 
-
-
-write.csv(file="prob.csv", x=prob, row.names = FALSE)
-# plot(modelFit_rf, log="y")
-
-
-  
-  
+write.csv(file="prob.csv", x=prob, row.names = FALSE) 
 }
 
-#capture.output(str(totalFeaturesList_Test[,-1], list.len = 999), file = "totalFeaturesList_Test.txt")
-#capture.output(str(training, list.len = 999), file = "training.txt")
+
+# # Post Analysis
+# if(postAnalysis  == 1){
+#   plot(varImp(modelFit_rf, scale = TRUE))
+#   
+# }
 
 
-# FFTtrain <-read.table("./data/cache/FFTTrain.txt")
-# fileSizeTrain <- read.table("./data/cache/fileSizeTrain.txt")
-# sampleSubmission <- read.csv("./data/sampleSubmission.csv")
-# sampleSubmission$fileName <- sampleSubmission$Id
-# sampleSubmission$fileName <- paste0(sampleSubmission$fileName,".")
-# sampleSubmission$fileName <- substr(sampleSubmission$fileName,2,nchar(sampleSubmission$fileName))
-# trainFileNames <- data.frame(sampleSubmission$Id, sampleSubmission$fileName)
-# names(trainFileNames)[1] <- "Id"
-# names(trainFileNames)[2] <- "fileName"
-# FFTtrain2 <- merge(FFTtrain, trainFileNames, by = "fileName")
-# FFTtrain2$fileName <- FFTtrain2$Id
-# FFTtrain2$Id <- NULL
-# write.table(FFTtrain2, "./data/cache/FFTTrain.txt")
-# 
-# 
-# fileSizeTrain2 <- merge(fileSizeTrain, trainFileNames, by = "fileName")
-# fileSizeTrain2$fileName <- fileSizeTrain2$Id
-# fileSizeTrain2$Id <- NULL
-# write.table(fileSizeTrain2, "./data/cache/fileSizeTrain.txt")
