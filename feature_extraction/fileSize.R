@@ -17,7 +17,7 @@ for (v  in 1:numFiles)
     fileSizeBytes <- file.info(fileNameBytes[v])$size
     fileSizeAsm <- file.info(fileNameAsm[v])$size
 
-    fileSizes <- rbind(fileSizes, data.frame(fileName, fileSizeBytes, fileSizeAsm ))                                                      
+    fileSizes <- rbind(fileSizes, data.frame(fileName, fileSizeBytes, fileSizeAsm))                                                      
   }
   
   return(fileSizes)

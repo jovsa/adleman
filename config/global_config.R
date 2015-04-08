@@ -43,4 +43,5 @@ library(e1071)
 library(parallel)
 library(doParallel)
 library(randomForest)
+library(stringr)
 
