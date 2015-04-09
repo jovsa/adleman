@@ -53,8 +53,8 @@ if(readFromCache ==1){
 # TEMPER 
 dataType <- "train"
 ###
-source("./feature_extraction/segmentAnalysis.R")
-segmentAnalysis <- segmentAnalysisFunction(dataType)
+##source("./feature_extraction/segmentAnalysis.R")
+##segmentAnalysis <- segmentAnalysisFunction(dataType)
 # TEMPER
 
 
