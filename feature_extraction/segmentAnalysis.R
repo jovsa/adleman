@@ -7,8 +7,9 @@ numFiles <- length(fileNameAsm)
 fileSizes <- NULL
 segmentAnalysis <- NULL
 
-numFiles <- 3
+#numFiles <- 3
 for (v  in 1:numFiles){
+  print(paste0(fileNameAsm[v], " counter: ", v))
   fileName <- substr(fileNameAsm[v], 14,33)
   file <- readLines(fileNameAsm[v])
   header <- sum(str_count(file, "^HEADER:"))
