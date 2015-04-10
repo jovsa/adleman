@@ -56,8 +56,6 @@ if(readFromCache ==1){
 }
 
 
-## from here
-
 # Feature list compilation
 if(featureList  == 1){
   dataType <- "train"
