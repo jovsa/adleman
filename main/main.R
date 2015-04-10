@@ -41,22 +41,22 @@ if(featureExtraction  == 1){
   fileSizes <- fileSizeFunction(dataType)
   #write.table(fileSizes, file="./data/cache/fileSizeTrain_n_1898.txt")
   
+  source("./feature_extraction/segmentAnalysis.R")
+  segmentAnalysis <- segmentAnalysisFunction(dataType)
+  #write.table(segmentAnalysis, file="./data/cache/segmentAnalysis_n_1898.txt")
+  
 }
 
 
 if(readFromCache ==1){
   FFT <- read.table("./data/cache/FFTTrain_n_1898.txt")
   fileSizes <- read.table("./data/cache/fileSizeTrain_n_1898.txt")
+  segmentAnalysis <- read.table("./data/cache/segmentAnalysis_n_1898.txt")
+  
 }
 
 
-# TEMPER 
-dataType <- "train"
-###
-source("./feature_extraction/segmentAnalysis.R")
-segmentAnalysis <- segmentAnalysisFunction(dataType)
-# TEMPER
-
+## from here
 
 # Feature list compilation
 if(featureList  == 1){
