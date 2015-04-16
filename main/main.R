@@ -47,6 +47,11 @@ if(featureExtraction  == 1){
   
 }
 
+## HERE
+dataType <- "test"
+source("./feature_extraction/segmentAnalysis.R")
+segmentAnalysis <- segmentAnalysisFunction(dataType)
+####
 
 if(readFromCache ==1){
   FFT <- read.table("./data/cache/FFTTrain_n_1898.txt")
@@ -62,6 +67,9 @@ if(featureList  == 1){
   source("./features/feature_list.R")
   featureList <- featureListFunction(dataType)
 }
+
+
+
 
 
 # Data splitting
