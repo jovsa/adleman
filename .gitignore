@@ -1,4 +1,5 @@
 *.Rhistory
 data/test/**
 data/train/**
+data/dataSample/**
 prob.csv
