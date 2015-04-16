@@ -21,5 +21,6 @@ _Notable links (provided by Kaggle):_
 * [Timelines](https://www.kaggle.com/c/malware-classification/details/timeline)   
 
 
-source of original image: 
-http://i1.wp.com/theultralinx.com/wp-content/uploads/2014/11/Wallpaper-of-the-Week-175.jpeghttp://i1.wp.com/theultralinx.com/wp-content/uploads/2014/11/Wallpaper-of-the-Week-175.jpeg
+Refrences:
+* [Cover Images](http://i1.wp.com/theultralinx.com/wp-content/uploads/2014/11/Wallpaper-of-the-Week-175.jpeghttp://i1.wp.com/theultralinx.com/wp-content/uploads/2014/11/Wallpaper-of-the-Week-175.jpeg)
+* --
