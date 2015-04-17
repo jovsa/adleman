@@ -19,7 +19,7 @@ featureList <- 1
 dataSplit <- 1
 modelTrain <- 1
 CVResults <- 1
-totalTestData <- 1
+totalTestData <- 0
 postAnalysis <- 0
 
 
